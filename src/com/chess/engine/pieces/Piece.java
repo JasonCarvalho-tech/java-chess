@@ -21,14 +21,17 @@ public abstract class Piece {
         this.isFirstMove = false;
     }
 
-    public Boolean isFirstMove() {
-        return this.isFirstMove;
+    public int getPiecePosition() {
+        return this.piecePosition;
     }
 
     public Alliance getPieceAlliance() {
         return this.pieceAlliance;
     }
 
-    public abstract Collection<Move> calculateLegalMoves(final Board board);
+    public Boolean isFirstMove() {
+        return this.isFirstMove;
+    }
 
+    public abstract Collection<Move> calculateLegalMoves(final Board board);
 }
