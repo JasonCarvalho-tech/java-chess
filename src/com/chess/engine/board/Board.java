@@ -22,7 +22,7 @@ public class Board {
     private static List<Tile> createGameboard(final Builder builder) {
         final Tile[] tiles = new Tile[BoardUtils.NUM_TILES];
         for(int i = 0; i < BoardUtils.NUM_TILES; i++) {
-            tiles[i] = Tile.createTile(i, builder.boardConfig.get(i))
+            tiles[i] = Tile.createTile(i, builder.boardConfig.get(i));
         }
         return ImmutableList.copyOf(tiles);
     }
@@ -63,6 +63,10 @@ public class Board {
         builder.setPiece(new Pawn(Alliance.WHITE, 50));
         builder.setPiece(new Pawn(Alliance.WHITE, 49));
         builder.setPiece(new Pawn(Alliance.WHITE, 48));
+
+        builder.setMoveMaker(Alliance.WHITE);
+
+        return builder.build();
     }
 
     public static class Builder {
