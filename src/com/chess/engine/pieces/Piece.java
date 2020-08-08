@@ -42,7 +42,7 @@ public abstract class Piece {
         BISHOP("B"),
         ROOK("R"),
         QUEEN("Q"),
-        KING("k");
+        KING("K");
 
         private String pieceName;
 
