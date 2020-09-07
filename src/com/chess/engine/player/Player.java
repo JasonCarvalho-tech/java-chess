@@ -31,6 +31,7 @@ public abstract class Player {
         throw new RuntimeException("Should not reach here! Not a valid Board!");
     }
 
+    //TODO implement the methods below
     public boolean isMoveLegal(final Move move) {
         return this.legalMoves.contains(move);
     }
@@ -49,6 +50,10 @@ public abstract class Player {
 
     public boolean isCasted() {
         return false;
+    }
+
+    public MoveTransition makeMove(final Move move) {
+        return null;
     }
 
     public abstract Collection<Piece> getActivePieces ();
