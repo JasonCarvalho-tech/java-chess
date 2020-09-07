@@ -31,6 +31,26 @@ public abstract class Player {
         throw new RuntimeException("Should not reach here! Not a valid Board!");
     }
 
+    public boolean isMoveLegal(final Move move) {
+        return this.legalMoves.contains(move);
+    }
+
+    public boolean isInCheck() {
+        return  false;
+    }
+
+    public boolean isInCheckMate() {
+        return false;
+    }
+
+    public boolean isInStaleMate() {
+        return false;
+    }
+
+    public boolean isCasted() {
+        return false;
+    }
+
     public abstract Collection<Piece> getActivePieces ();
     public abstract Alliance getAlliance();
     public abstract Player getOpponent();
