@@ -54,14 +54,24 @@ public abstract class Player {
         return  this.isInCheck;
     }
 
-    //TODO implement the methods below
     public boolean isInCheckMate() {
-        return false;
+        return this.isInCheck && !hasEscapeMoves();
     }
 
+    //TODO implement the methods below
     public boolean isInStaleMate() {
         return false;
     }
+
+    protected boolean hasEscapeMoves() {
+        for(final Move move: this.legalMoves) {
+            final MoveTransition transition = makeMove(move);
+            if(transition.getMoveStatus().isDone()) {
+                return true;
+            }
+        }
+        return false;
+    };
 
     public boolean isCasted() {
         return false;
