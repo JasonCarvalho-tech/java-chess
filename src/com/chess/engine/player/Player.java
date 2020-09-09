@@ -31,6 +31,10 @@ public abstract class Player {
         return this.playerKing;
     }
 
+    public Collection<Move> getLegalMoves() {
+        return this.legalMoves;
+    }
+
     private static Collection<Move> calculateAttacksOnTile(int piecePosition, Collection<Move> moves) {
         final List<Move> attackMoves = new ArrayList<>();
         for(final Move move: moves) {
