@@ -55,6 +55,11 @@ public class Queen extends Piece{
     }
 
     @Override
+    public Queen MovePiece(Move move) {
+        return new Queen(move.getMovedPiece().getPieceAlliance(), move.getDestinationCoordinate());
+    }
+
+    @Override
     public String toString() {
         return PieceType.QUEEN.toString();
     }
