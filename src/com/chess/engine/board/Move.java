@@ -25,7 +25,22 @@ public abstract class Move {
         return this.movedPiece;
     }
 
-    public abstract Board execute();
+    public Board execute() {
+        final Board.Builder builder = new Board.Builder();
+        for(final Piece  piece : this.board.currentPlayer().getActivePieces()) {
+            //TODO hashcode and equals for pieces
+            if(!this.movedPiece.equals(piece)) {
+                builder.setPiece(piece);
+            }
+        }
+        for(final Piece piece : this.board.currentPlayer().getActivePieces()) {
+            builder.setPiece(piece);
+        }
+        //move the moved piece
+        builder.setPiece(this.movedPiece.MovePiece(this));
+        builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
+        return builder.build();
+    }
 
     public static final class MajorMove extends Move{
 
@@ -35,23 +50,6 @@ public abstract class Move {
             super(board, movedPiece, destinationCoordinate);
         }
 
-        @Override
-        public Board execute() {
-            final Board.Builder builder = new Board.Builder();
-            for(final Piece  piece : this.board.currentPlayer().getActivePieces()) {
-                //TODO hashcode and equals for pieces
-                if(!this.movedPiece.equals(piece)) {
-                    builder.setPiece(piece);
-                }
-            }
-            for(final Piece piece : this.board.currentPlayer().getActivePieces()) {
-                builder.setPiece(piece);
-            }
-            //move the moved piece
-            builder.setPiece(this.movedPiece.MovePiece(this));
-            builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
-            return builder.build();
-        }
     }
 
     public static final class AttackMove extends Move{
