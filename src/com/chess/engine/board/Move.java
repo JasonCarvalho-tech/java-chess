@@ -1,7 +1,10 @@
 package com.chess.engine.board;
 
 
+import com.chess.engine.pieces.Pawn;
 import com.chess.engine.pieces.Piece;
+
+import static com.chess.engine.board.Board.*;
 
 public abstract class Move {
 
@@ -68,7 +71,7 @@ public abstract class Move {
     }
 
     public Board execute() {
-        final Board.Builder builder = new Board.Builder();
+        final Builder builder = new Builder();
         for(final Piece  piece : this.board.currentPlayer().getActivePieces()) {
             //TODO hashcode and equals for pieces
             if(!this.movedPiece.equals(piece)) {
@@ -79,7 +82,7 @@ public abstract class Move {
             builder.setPiece(piece);
         }
         //move the moved piece
-        builder.setPiece(this.movedPiece.MovePiece(this));
+        builder.setPiece(this.movedPiece.movePiece(this));
         builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
         return builder.build();
     }
@@ -170,6 +173,24 @@ public abstract class Move {
                                        final Piece movedPiece,
                                        final int destinationCoordinate) {
             super(board, movedPiece, destinationCoordinate);
+        }
+
+        @Override
+        public Board execute() {
+            final Builder builder = new Builder();
+            for(final Piece piece: this.board.currentPlayer().getActivePieces()) {
+                if(!this.movedPiece.equals(piece)){
+                    builder.setPiece(piece);
+                }
+            }
+            for(final Piece piece: this.board.currentPlayer().getOpponent().getActivePieces()) {
+                builder.setPiece(piece);
+            }
+            final Pawn movedPawn = (Pawn)this.movedPiece.movePiece(this);
+            builder.setPiece(movedPawn);
+            builder.setEnPassantPawn(movedPawn);
+            builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
+            return builder.build();
         }
     }
 
