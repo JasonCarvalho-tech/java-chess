@@ -31,6 +31,18 @@ public abstract class Move {
         return this.getMovedPiece().getPiecePosition();
     }
 
+    public boolean isAttack() {
+        return false;
+    }
+
+    public boolean isCastlingMove() {
+        return false;
+    }
+
+    public Piece getAttackedPiece() {
+        return null;
+    }
+
     public Board execute() {
         final Board.Builder builder = new Board.Builder();
         for(final Piece  piece : this.board.currentPlayer().getActivePieces()) {
