@@ -40,25 +40,29 @@ public class WhitePlayer extends Player {
 
         if(this.playerKing.isFirstMove() && !this.isInCheck()) {
             //whites king side castle
-            if(!this.board.getTile(61).isTileOccupied() && !this.board.getTile(62).isTileOccupied()) {
+            if (!this.board.getTile(61).isTileOccupied() && !this.board.getTile(62).isTileOccupied()) {
                 final Tile rookTile = this.board.getTile(63);
-                if (rookTile.isTileOccupied() && rookTile.getPiece().isFirstMove()){
-                    //TODO ADD A CASTLEMOVE
-                    kingCastles.add(null);
+                if (Player.calculateAttacksOnTile(61, opponentsLegals).isEmpty() &&
+                        Player.calculateAttacksOnTile(62, opponentsLegals).isEmpty() &&
+                        rookTile.getPiece().getPieceType().isRook()) {
+                    if (rookTile.isTileOccupied() && rookTile.getPiece().isFirstMove()) {
+                        //TODO ADD A CASTLEMOVE
+                        kingCastles.add(null);
+                    }
                 }
             }
 
             //whites queen side castle
-            if(!this.board.getTile(59).isTileOccupied() &&
+            if (!this.board.getTile(59).isTileOccupied() &&
                     !this.board.getTile(58).isTileOccupied() &&
                     !this.board.getTile(57).isTileOccupied()) {
                 final Tile rookTile = this.board.getTile(56);
-                if (rookTile.isTileOccupied() && rookTile.getPiece().isFirstMove()){
+                if (rookTile.isTileOccupied() && rookTile.getPiece().isFirstMove()) {
                     //TODO ADD A CASTLEMOVE
                     kingCastles.add(null);
                 }
             }
-
+        }
         return ImmutableList.copyOf(kingCastles);
     }
 }
