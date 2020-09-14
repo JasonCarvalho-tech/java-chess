@@ -47,7 +47,17 @@ public class WhitePlayer extends Player {
                     kingCastles.add(null);
                 }
             }
-        }
+
+            //whites queen side castle
+            if(!this.board.getTile(59).isTileOccupied() &&
+                    !this.board.getTile(58).isTileOccupied() &&
+                    !this.board.getTile(57).isTileOccupied()) {
+                final Tile rookTile = this.board.getTile(56);
+                if (rookTile.isTileOccupied() && rookTile.getPiece().isFirstMove()){
+                    //TODO ADD A CASTLEMOVE
+                    kingCastles.add(null);
+                }
+            }
 
         return ImmutableList.copyOf(kingCastles);
     }
