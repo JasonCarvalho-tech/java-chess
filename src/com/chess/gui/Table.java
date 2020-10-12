@@ -12,6 +12,9 @@ import java.util.List;
 
 public class Table {
 
+    private final Color lightTileColor = Color.decode("#FFFACD");
+    private final Color darkTileColor = Color.decode("#593E1A");
+
     private final JFrame gameFrame;
     private final BoardPanel boardPanel;
 
@@ -49,6 +52,7 @@ public class Table {
             }
         });
         fileMenu.add(openPGN);
+
         return fileMenu;
     }
 
@@ -81,7 +85,17 @@ public class Table {
         }
 
         private void assignTileColor() {
+            if (BoardUtils.FIRST_ROW[this.tileId] ||
+                    BoardUtils.THIRD_ROW[this.tileId] ||
+                    BoardUtils.FIFTH_ROW[this.tileId] ||
+                    BoardUtils.SEVENTH_ROW[this.tileId]){
+                setBackground(this.tileId % 2 == 0 ? lightTileColor : darkTileColor);
+            } else if(BoardUtils.SECOND_ROW[this.tileId] ||
+                    BoardUtils.FOURTH_ROW[this.tileId] ||
+                    BoardUtils.SIXTH_ROW[this.tileId] ||
+                    BoardUtils.EIGHTH_ROW[this.tileId]) {
+                setBackground(this.tileId % 2 != 0 ? lightTileColor : darkTileColor);
+            }
         }
     }
-
 }
